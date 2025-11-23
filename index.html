@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介 - Memz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin: 0 auto 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+        
+        .social-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .social-btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .about-section {
+            flex: 2;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+            color: var(--secondary-color);
+        }
+        
+        .about-content {
+            margin-bottom: 30px;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+        }
+        
+        .skills {
+            margin-top: 30px;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: var(--light-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            flex: 1;
+        }
+        
+        .sidebar-widget {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .sidebar-widget h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+            color: var(--secondary-color);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            width: 30px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--light-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* 软件展示区域 */
+        .software-section {
+            margin-bottom: 50px;
+        }
+        
+        .software-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background-color: var(--light-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .software-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .software-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .software-img {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .software-content {
+            padding: 20px;
+        }
+        
+        .software-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .software-content p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .software-links {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .software-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .software-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 合集卡片样式 */
+        .collection-card {
+            grid-column: 1 / -1;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .collection-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .collection-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .collection-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .collection-item {
+            background-color: var(--light-color);
+            border-radius: 5px;
+            padding: 15px;
+        }
+        
+        .collection-item h4 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .collection-item p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .collection-item .software-links {
+            margin-top: 10px;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-column ul li i {
+            width: 20px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .footer-social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .collection-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-btn {
+                justify-content: center;
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .footer-column ul li {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">个人<span>简介</span></div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul id="main-menu">
+                        <li><a href="#" class="active">首页</a></li>
+                        <li><a href="#software">软件作品</a></li>
+                        <li><a href="#experience">经历</a></li>
+                        <li><a href="#contact">联系</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="profile-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h1>个人简介</h1>
+                    <p>热爱编程的技术爱好者，专注于软件开发和Web技术</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://space.bilibili.com/3493259454187965?spm_id_from=333.1007.0.0" class="social-btn" id="bilibili-btn">
+                        <i class="fab fa-bilibili"></i> Bilibili空间
+                    </a>
+                    <a href="https://github.com/memz-web?tab=repositories" class="social-btn">
+                        <i class="fab fa-github"></i> GitHub仓库
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <div class="main-content">
+            <!-- 个人介绍区域 -->
+            <section class="about-section">
+                <h2 class="section-title">关于我</h2>
+                
+                <div class="about-content">
+                    <p>大家好，我是Memz，一名热爱编程的技术爱好者。我专注于软件开发，对编程技术有着浓厚的兴趣。</p>
+                    <p>在我的编程旅程中，我不断学习新的技术，探索创新的解决方案。我喜欢开发有趣实用的软件，特别是那些能够带来欢乐或解决实际问题的应用。</p>
+                    <p>除了编程，我还喜欢分享知识，在B站上发布技术教程，与大家交流学习心得。</p>
+                </div>
+            </section>
+
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3>联系信息</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>maggie1baby@163.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>maggie11baby@outlook.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>17843166870</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>长春</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget" id="experience">
+                    <h3>开发经历</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>电脑卡死系列</h4>
+                                <p>开发了一系列有趣的电脑卡死效果软件</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>真的电脑病毒系列</h4>
+                                <p>深入研究系统安全，开发演示性病毒软件</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <!-- 软件展示区域 -->
+        <section class="software-section" id="software">
+            <h2 class="section-title">软件作品</h2>
+            
+            <div class="software-categories">
+                <div class="category-tab active" data-category="freeze">电脑卡死系列</div>
+                <div class="category-tab" data-category="virus">真的电脑病毒系列</div>
+            </div>
+            
+            <div class="software-grid">
+                <!-- 电脑卡死系列 -->
+                <div class="software-card freeze">
+                    <div class="software-img" style="background-color: #0078d7;">
+                        <i class="fab fa-windows" style="font-size: 4rem;"></i>
+                    </div>
+                    <div class="software-content">
+                        <h3>蓝屏模拟器</h3>
+                        <p>模拟Windows蓝屏死机效果，逼真还原系统崩溃场景。</p>
+                        <div class="software-links">
+                            <a href="#" class="software-link">下载</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card freeze">
+                    <div class="software-img" style="background-color: #e74c3c;">
+                        <i class="fas fa-bomb" style="font-size: 4rem;"></i>
+                    </div>
+                    <div class="software-content">
+                        <h3>无限运行卡死（界面不可视）</h3>
+                        <p>运行后导致电脑界面无响应，无法看到运行窗口。</p>
+                        <div class="software-links">
+                            <a href="#" class="software-link">下载</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card freeze">
+                    <div class="software-img" style="background-color: #0078d7;">
+                        <i class="fab fa-windows" style="font-size: 4rem;"></i>
+                    </div>
+                    <div class="software-content">
+                        <h3>无限运行卡死（3分钟后蓝屏）</h3>
+                        <p>运行后电脑逐渐变慢，大约3分钟后触发蓝屏。</p>
+                        <div class="software-links">
+                            <a href="#" class="software-link">下载</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 真的电脑病毒系列 - 合集卡片 -->
+                <div class="collection-card virus" style="display: none;">
+                    <div class="collection-header">
+                        <h3>真的电脑病毒系列</h3>
+                        <p>教育性演示软件合集，用于系统安全研究和学习</p>
+                    </div>
+                    <div class="collection-items">
+                        <div class="collection-item">
+                            <h4>文件加密器</h4>
+                            <p>演示性病毒，加密指定文件夹内的文件，需要密码才能解密。</p>
+                            <div class="software-links">
+                                <a href="#" class="software-link">下载</a>
+                            </div>
+                        </div>
+                        <div class="collection-item">
+                            <h4>键盘记录器</h4>
+                            <p>教育性演示程序，展示键盘记录原理，用于安全意识培训。</p>
+                            <div class="software-links">
+                                <a href="#" class="software-link">下载</a>
+                            </div>
+                        </div>
+                        <div class="collection-item">
+                            <h4>系统资源占用器</h4>
+                            <p>模拟恶意软件行为，演示如何占用系统资源。</p>
+                            <div class="software-links">
+                                <a href="#" class="software-link">下载</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于本站</h3>
+                    <p>这是我的个人简介页面，用于展示我的软件作品和开发经历。</p>
+                    <div class="footer-social-links">
+                        <a href="https://space.bilibili.com/3493259454187965?spm_id_from=333.1007.0.0" title="Bilibili" id="footer-bilibili">
+                            <i class="fab fa-bilibili"></i>
+                        </a>
+                        <a href="https://github.com/memz-web?tab=repositories" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#software">软件作品</a></li>
+                        <li><a href="#experience">经历</a></li>
+                        <li><a href="#contact">联系</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> maggie1baby@163.com</li>
+                        <li><i class="fas fa-envelope"></i> maggie11baby@outlook.com</li>
+                        <li><i class="fas fa-phone"></i> 17843166870</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 长春</li>
+                        <li><i class="fas fa-link"></i> <a href="https://space.bilibili.com/3493259454187965?spm_id_from=333.1007.0.0" style="color: #bdc3c7;">Bilibili空间</a></li>
+                        <li><i class="fas fa-link"></i> <a href="https://github.com/memz-web?tab=repositories" style="color: #bdc3c7;">GitHub仓库</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 个人简介页面. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- B站提示模态框 -->
+    <div class="modal" id="bilibili-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close">&times;</span>
+            <div class="modal-icon">
+                <i class="fab fa-bilibili"></i>
+            </div>
+            <h3>给我投个币吧</h3>
+            <p>（名字是不小心输的）</p>
+            <button class="btn" style="margin-top: 20px;" id="go-to-bilibili">前往B站</button>
+        </div>
+    </div>
+
+    <script>
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('main-menu').classList.toggle('show');
+        });
+        
+        // B站链接点击事件
+        document.getElementById('bilibili-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('bilibili-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('footer-bilibili').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('bilibili-modal').style.display = 'flex';
+        });
+        
+        // 模态框关闭事件
+        document.getElementById('modal-close').addEventListener('click', function() {
+            document.getElementById('bilibili-modal').style.display = 'none';
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('bilibili-modal')) {
+                document.getElementById('bilibili-modal').style.display = 'none';
+            }
+        });
+        
+        // 前往B站按钮
+        document.getElementById('go-to-bilibili').addEventListener('click', function() {
+            window.open('https://space.bilibili.com/3493259454187965?spm_id_from=333.1007.0.0', '_blank');
+            document.getElementById('bilibili-modal').style.display = 'none';
+        });
+        
+        // 软件分类切换
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有标签的活动状态
+                document.querySelectorAll('.category-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // 添加当前标签的活动状态
+                this.classList.add('active');
+                
+                // 获取分类
+                const category = this.getAttribute('data-category');
+                
+                // 隐藏所有软件卡片
+                document.querySelectorAll('.software-card').forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // 隐藏合集卡片
+                document.querySelectorAll('.collection-card').forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // 显示当前分类的软件卡片
+                if (category === 'freeze') {
+                    document.querySelectorAll('.software-card.freeze').forEach(card => {
+                        card.style.display = 'block';
+                    });
+                } else if (category === 'virus') {
+                    document.querySelectorAll('.collection-card.virus').forEach(card => {
+                        card.style.display = 'flex';
+                    });
+                }
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
